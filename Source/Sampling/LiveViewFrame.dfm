@@ -1,11 +1,11 @@
 object framLiveView: TframLiveView
   Left = 0
   Top = 0
-  Width = 647
+  Width = 703
   Height = 507
   TabOrder = 0
   object Splitter1: TSplitter
-    Left = 155
+    Left = 195
     Top = 97
     Height = 410
     ExplicitLeft = 115
@@ -14,7 +14,7 @@ object framLiveView: TframLiveView
     AlignWithMargins = True
     Left = 2
     Top = 99
-    Width = 151
+    Width = 191
     Height = 406
     Margins.Left = 2
     Margins.Top = 2
@@ -32,7 +32,7 @@ object framLiveView: TframLiveView
     object pnlThreads: TPanel
       Left = 2
       Top = 15
-      Width = 147
+      Width = 187
       Height = 26
       Align = alTop
       BevelOuter = bvNone
@@ -43,6 +43,7 @@ object framLiveView: TframLiveView
       Font.Style = []
       ParentFont = False
       TabOrder = 0
+      ExplicitWidth = 147
       object btnRefreshThreads: TBitBtn
         Left = 4
         Top = 1
@@ -80,28 +81,11 @@ object framLiveView: TframLiveView
         TabOrder = 0
       end
     end
-    object lbThreads: TListBox
-      AlignWithMargins = True
-      Left = 5
-      Top = 312
-      Width = 141
-      Height = 89
-      Align = alBottom
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      ItemHeight = 13
-      ParentFont = False
-      TabOrder = 1
-      OnClick = lbThreadsClick
-    end
     object lvThreads: TListView
       Left = 2
       Top = 41
-      Width = 147
-      Height = 268
+      Width = 187
+      Height = 363
       Align = alClient
       Columns = <
         item
@@ -109,6 +93,7 @@ object framLiveView: TframLiveView
         end
         item
           Caption = 'Creation'
+          Width = 130
         end>
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -117,15 +102,19 @@ object framLiveView: TframLiveView
       Font.Style = []
       RowSelect = True
       ParentFont = False
-      TabOrder = 2
+      TabOrder = 1
       ViewStyle = vsReport
+      OnChange = lvThreadsChange
+      OnColumnClick = lvThreadsColumnClick
+      OnCompare = lvThreadsCompare
+      ExplicitWidth = 163
     end
   end
   object GroupBox2: TGroupBox
     AlignWithMargins = True
-    Left = 160
+    Left = 200
     Top = 99
-    Width = 485
+    Width = 501
     Height = 406
     Margins.Left = 2
     Margins.Top = 2
@@ -140,11 +129,13 @@ object framLiveView: TframLiveView
     Font.Style = [fsBold]
     ParentFont = False
     TabOrder = 1
+    ExplicitLeft = 160
+    ExplicitWidth = 485
     object Memo1: TMemo
       AlignWithMargins = True
       Left = 5
       Top = 44
-      Width = 475
+      Width = 491
       Height = 342
       Align = alClient
       Font.Charset = DEFAULT_CHARSET
@@ -156,11 +147,12 @@ object framLiveView: TframLiveView
       ScrollBars = ssBoth
       TabOrder = 0
       WordWrap = False
+      ExplicitWidth = 475
     end
     object pnlStack: TPanel
       Left = 2
       Top = 15
-      Width = 481
+      Width = 497
       Height = 26
       Align = alTop
       BevelOuter = bvNone
@@ -171,6 +163,7 @@ object framLiveView: TframLiveView
       Font.Style = []
       ParentFont = False
       TabOrder = 1
+      ExplicitWidth = 521
       object chkAutoRefresh: TCheckBox
         Left = 136
         Top = 5
@@ -247,7 +240,7 @@ object framLiveView: TframLiveView
     object Panel1: TPanel
       Left = 2
       Top = 389
-      Width = 481
+      Width = 497
       Height = 15
       Align = alBottom
       BevelOuter = bvNone
@@ -258,6 +251,7 @@ object framLiveView: TframLiveView
       Font.Style = []
       ParentFont = False
       TabOrder = 2
+      ExplicitWidth = 481
       object Label1: TLabel
         Left = 3
         Top = -1
@@ -277,7 +271,7 @@ object framLiveView: TframLiveView
   object GroupBox3: TGroupBox
     Left = 0
     Top = 0
-    Width = 647
+    Width = 703
     Height = 97
     Align = alTop
     Caption = ' Process '
@@ -288,6 +282,7 @@ object framLiveView: TframLiveView
     Font.Style = [fsBold]
     ParentFont = False
     TabOrder = 2
+    ExplicitWidth = 647
     object Label2: TLabel
       Left = 8
       Top = 42

@@ -111,6 +111,8 @@
         <AppEnableHighDPI>true</AppEnableHighDPI>
         <AppExecutionLevel>requireAdministrator</AppExecutionLevel>
         <BT_BuildType>Debug</BT_BuildType>
+        <DCC_ExeOutput>C:\Users\rodrigo.soares\Documents\Sofplan\Projetos\utils</DCC_ExeOutput>
+        <Icon_MainIcon>AsmProfiler_Sampling_Icon.ico</Icon_MainIcon>
     </PropertyGroup>
     <ItemGroup>
         <DelphiCompile Include="$(MainSource)">

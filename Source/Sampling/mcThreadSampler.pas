@@ -40,8 +40,9 @@ type
     FKerneltime_prev,
     FUsertime_ms,
     FKerneltime_ms,
-    FCreationtime,
+//    FCreationtime,
     FExittime: Int64;
+    FCreationtime: TDateTime;
     function GetSnapshotCount: integer;
     function GetSnapshotStack(aIndex: integer): PSnapshotStack;
     function GetRawStackDump(aIndex: integer): PStackDump;
@@ -224,7 +225,8 @@ end;
 
 function TThreadSampler.GetCreationtime: TDateTime;
 begin
-  Result := (Int64(FCreationtime) div 1000) / MSecsPerSec / SecsPerDay;
+  Result := FCreationtime;
+//  Result := (Int64(FCreationtime) div 1000) / MSecsPerSec / SecsPerDay;
 //  Result := FileTimeToSystemTime(FCreationtime);
 end;
 
@@ -682,8 +684,8 @@ end;
 
 procedure TThreadSampler.UpdateCPUTime;
 var
-  creationtime, exittime, kerneltime, usertime: JwaWinBase._FILETIME;
-  sys: _SYSTEMTIME;
+  creationtime, creationtime2, exittime, kerneltime, usertime: JwaWinBase._FILETIME;
+  Tmp: Integer;
 begin
   //Handle := OpenThread(THREAD_SET_INFORMATION or THREAD_QUERY_INFORMATION, False, windows.GetCurrentThreadId);
 
@@ -700,7 +702,15 @@ begin
   FUsertime_prev   := Int64(usertime);
   FKerneltime_prev := Int64(kerneltime);
 
-  FCreationtime  := Int64(creationtime);
+  try
+    FileTimeToLocalFileTime(creationtime, creationtime2);
+    FileTimeToDosDateTime(creationtime2, LongRec(Tmp).Hi, LongRec(Tmp).Lo);
+    FCreationtime  := FileDateToDateTime(Tmp);
+  except
+    FCreationtime := 0;
+  end;
+
+//  FCreationtime  := Int64(creationtime);
   FExittime      := Int64(exittime);
 end;
 

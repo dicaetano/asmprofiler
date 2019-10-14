@@ -13,7 +13,6 @@ type
   TframLiveView = class(TFrame)
     GroupBox1: TGroupBox;
     pnlThreads: TPanel;
-    lbThreads: TListBox;
     Splitter1: TSplitter;
     GroupBox2: TGroupBox;
     Memo1: TMemo;
@@ -43,15 +42,23 @@ type
     procedure actRefreshStackExecute(Sender: TObject);
     procedure ActionList1Update(Action: TBasicAction; var Handled: Boolean);
     procedure actTryStackwalk64APIExecute(Sender: TObject);
-    procedure lbThreadsClick(Sender: TObject);
     procedure btnProfileItClick(Sender: TObject);
     procedure chkAutoRefreshClick(Sender: TObject);
     procedure tmrRefreshTimer(Sender: TObject);
     procedure chkRawClick(Sender: TObject);
     procedure edtIntervalChange(Sender: TObject);
+    procedure lvThreadsColumnClick(Sender: TObject; Column: TListColumn);
+    procedure lvThreadsCompare(Sender: TObject; Item1, Item2: TListItem;
+      Data: Integer; var Compare: Integer);
+    procedure lvThreadsChange(Sender: TObject; Item: TListItem;
+      Change: TItemChange);
   private
     FProcessObject: TProcessSampler;
     FOnProfileItClick: TProfileNotify;
+
+    FDescending: Boolean;
+    FSortedColumn: Integer;
+
     procedure SetProcessObject(const Value: TProcessSampler);
   public
     destructor Destroy;override;
@@ -70,7 +77,7 @@ uses
 procedure TframLiveView.ActionList1Update(Action: TBasicAction; var Handled: Boolean);
 begin
   actRefreshThreads.Enabled := (ProcessObject <> nil);
-  actRefreshStack.Enabled   := (ProcessObject <> nil) and (lbThreads.ItemIndex >= 0);
+  actRefreshStack.Enabled   := (ProcessObject <> nil) and (lvThreads.ItemIndex >= 0);
 end;
 
 procedure TframLiveView.actRefreshStackExecute(Sender: TObject);
@@ -81,9 +88,9 @@ begin
   Memo1.Lines.BeginUpdate;
   try
     Memo1.Clear;
-    if lbThreads.ItemIndex >= 0 then
+    if lvThreads.ItemIndex >= 0 then
     begin
-      ts := lbThreads.Items.Objects[lbThreads.ItemIndex] as TThreadSampler;
+      ts := TThreadSampler(lvThreads.Items[lvThreads.ItemIndex].Data);
       ts.MakeStackDump(-1);
       lblDuration.Caption := Format('%4.3fms',[ts.GetDumpMakingDuration * MSecsPerDay]);
       Memo1.Lines.Text    := ts.TraceLastDump(chkRaw.Checked);
@@ -102,25 +109,22 @@ var
 begin
   if ProcessObject = nil then Exit;
 
-  lbThreads.Items.BeginUpdate;
   lvThreads.Items.BeginUpdate;
   try
 
     ProcessObject.RefreshThreads;
 
-    lbThreads.Clear;
     lvThreads.Clear;
     for i := 0 to ProcessObject.ThreadCount - 1 do
     begin
       ts := ProcessObject.Threads[i];
-      lbThreads.Items.AddObject( IntToStr(ts.ThreadId), ts);
       item := lvThreads.Items.Add;
       item.Caption := ts.ThreadId.ToString;
       item.SubItems.Add(DateTimeToStr(ts.Creationtime));
+      item.Data := ts;
     end;
 
   finally
-    lbThreads.Items.EndUpdate;
     lvThreads.Items.EndUpdate;
   end;
 end;
@@ -134,7 +138,7 @@ begin
   Screen.Cursor := crHourGlass;
   Memo1.Lines.BeginUpdate;
   try
-    ts := lbThreads.Items.Objects[lbThreads.ItemIndex] as TThreadSampler;
+    ts := TThreadSampler(lvThreads.Items[lvThreads.ItemIndex].Data);
     if ts.ThreadId = GetCurrentThreadId then
     begin
       MessageDlg('Stackwalk64 API does not work on the same thread!', mtError, [mbOK], 0);
@@ -183,12 +187,43 @@ end;
 
 procedure TframLiveView.edtIntervalChange(Sender: TObject);
 begin
+  chkAutoRefresh.Checked := False;
   chkAutoRefresh.Caption := 'Auto Refresh (' + FloatToStr(StrToIntDef(edtInterval.Text, 0) / 1000) + 's)';
+  tmrRefresh.Interval := StrToInt(edtInterval.Text);
 end;
 
-procedure TframLiveView.lbThreadsClick(Sender: TObject);
+procedure TframLiveView.lvThreadsChange(Sender: TObject; Item: TListItem;
+  Change: TItemChange);
 begin
   actRefreshStack.Execute;
+end;
+
+procedure TframLiveView.lvThreadsColumnClick(Sender: TObject;
+  Column: TListColumn);
+begin
+  TListView(Sender).SortType := stNone;
+  if Column.Index <> FSortedColumn then
+  begin
+    FSortedColumn := Column.Index;
+    FDescending := False;
+  end
+  else
+    FDescending := not FDescending;
+
+  TListView(Sender).SortType := stText;
+end;
+
+procedure TframLiveView.lvThreadsCompare(Sender: TObject; Item1,
+  Item2: TListItem; Data: Integer; var Compare: Integer);
+begin
+  if FSortedColumn = 0 then
+    Compare := CompareText(Item1.Caption, Item2.Caption)
+  else
+  if FSortedColumn <> 0 then
+    Compare := CompareText(Item1.SubItems[FSortedColumn-1], Item2.SubItems[FSortedColumn-1]);
+
+  if FDescending then
+    Compare := -Compare;
 end;
 
 procedure TframLiveView.SetProcessObject(const Value: TProcessSampler);
@@ -204,7 +239,7 @@ begin
     edtFile.Text := ProcessObject.ProcessExe;
 
     actRefreshThreads.Execute;   //load threads
-    lbThreads.ItemIndex := 0;
+    lvThreads.ItemIndex := 0;
     actRefreshStack.Execute;     //show stack of first thread
   end;
 end;

@@ -58,6 +58,7 @@ procedure TfrmAction.FormKeyDown(Sender: TObject; var Key: Word;
           AControl.SetFocus;
       end
       else
+      if AControl is TWinControl then
       for i := 0 to AControl.ControlCount-1 do
         Search(TWinControl(AControl.Controls[i]));
     end;
