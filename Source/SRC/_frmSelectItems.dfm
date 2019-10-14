@@ -8,7 +8,7 @@ object frmSelectItems: TfrmSelectItems
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
-  Font.Name = 'MS Sans Serif'
+  Font.Name = 'Segoe UI'
   Font.Style = []
   OldCreateOrder = False
   OnCreate = FormCreate
@@ -23,9 +23,8 @@ object frmSelectItems: TfrmSelectItems
     Width = 75
     Height = 25
     Anchors = [akRight, akBottom]
-    DoubleBuffered = True
     Kind = bkCancel
-    ParentDoubleBuffered = False
+    NumGlyphs = 2
     TabOrder = 0
   end
   object btnOK: TBitBtn
@@ -36,7 +35,6 @@ object frmSelectItems: TfrmSelectItems
     Anchors = [akRight, akBottom]
     Caption = 'OK'
     Default = True
-    DoubleBuffered = True
     Glyph.Data = {
       DE010000424DDE01000000000000760000002800000024000000120000000100
       0400000000006801000000000000000000001000000000000000000000000000
@@ -56,7 +54,6 @@ object frmSelectItems: TfrmSelectItems
       0000}
     ModalResult = 1
     NumGlyphs = 2
-    ParentDoubleBuffered = False
     TabOrder = 1
     OnClick = btnOKClick
   end
@@ -78,17 +75,22 @@ object frmSelectItems: TfrmSelectItems
         Height = 549
         Align = alClient
         TabOrder = 0
+        ExplicitHeight = 549
         inherited vtreeItems: TVirtualStringTree
-          Height = 518
+          Height = 497
           TreeOptions.SelectionOptions = [toFullRowSelect, toMultiSelect, toSimpleDrawSelection]
+          ExplicitHeight = 497
         end
         inherited Panel1: TPanel
           Top = 518
+          ExplicitTop = 518
           inherited Label2: TLabel
-            Width = 93
+            Width = 99
+            ExplicitWidth = 99
           end
           inherited lblIncrSearch: TLabel
             Width = 6
+            ExplicitWidth = 6
           end
         end
       end
@@ -103,17 +105,22 @@ object frmSelectItems: TfrmSelectItems
         Height = 549
         Align = alClient
         TabOrder = 0
+        ExplicitHeight = 549
         inherited vtreeItems: TVirtualStringTree
-          Height = 518
+          Height = 497
           TreeOptions.SelectionOptions = [toMultiSelect, toSimpleDrawSelection]
+          ExplicitHeight = 497
         end
         inherited Panel1: TPanel
           Top = 518
+          ExplicitTop = 518
           inherited Label2: TLabel
-            Width = 93
+            Width = 99
+            ExplicitWidth = 99
           end
           inherited lblIncrSearch: TLabel
             Width = 6
+            ExplicitWidth = 6
           end
         end
       end
@@ -128,17 +135,22 @@ object frmSelectItems: TfrmSelectItems
         Height = 549
         Align = alClient
         TabOrder = 0
+        ExplicitHeight = 549
         inherited vtreeItems: TVirtualStringTree
-          Height = 518
+          Height = 497
           TreeOptions.SelectionOptions = [toMultiSelect, toSimpleDrawSelection]
+          ExplicitHeight = 497
         end
         inherited Panel1: TPanel
           Top = 518
+          ExplicitTop = 518
           inherited Label2: TLabel
-            Width = 93
+            Width = 99
+            ExplicitWidth = 99
           end
           inherited lblIncrSearch: TLabel
             Width = 6
+            ExplicitWidth = 6
           end
         end
       end
@@ -186,17 +198,22 @@ object frmSelectItems: TfrmSelectItems
         Height = 549
         Align = alClient
         TabOrder = 0
+        ExplicitHeight = 549
         inherited vtreeItems: TVirtualStringTree
-          Height = 518
+          Height = 497
           TreeOptions.SelectionOptions = [toMultiSelect, toSimpleDrawSelection]
+          ExplicitHeight = 497
         end
         inherited Panel1: TPanel
           Top = 518
+          ExplicitTop = 518
           inherited Label2: TLabel
-            Width = 93
+            Width = 99
+            ExplicitWidth = 99
           end
           inherited lblIncrSearch: TLabel
             Width = 6
+            ExplicitWidth = 6
           end
         end
       end
@@ -207,7 +224,7 @@ object frmSelectItems: TfrmSelectItems
       object Label1: TLabel
         Left = 8
         Top = 8
-        Width = 421
+        Width = 457
         Height = 39
         Caption = 
           'Here will come some extra plugins, like monitoring CPU, HD, Netw' +

@@ -1,19 +1,20 @@
 object framLiveView: TframLiveView
   Left = 0
   Top = 0
-  Width = 592
+  Width = 647
   Height = 507
   TabOrder = 0
   object Splitter1: TSplitter
-    Left = 115
+    Left = 155
     Top = 97
     Height = 410
+    ExplicitLeft = 115
   end
   object GroupBox1: TGroupBox
     AlignWithMargins = True
     Left = 2
     Top = 99
-    Width = 111
+    Width = 151
     Height = 406
     Margins.Left = 2
     Margins.Top = 2
@@ -31,7 +32,7 @@ object framLiveView: TframLiveView
     object pnlThreads: TPanel
       Left = 2
       Top = 15
-      Width = 107
+      Width = 147
       Height = 26
       Align = alTop
       BevelOuter = bvNone
@@ -82,10 +83,10 @@ object framLiveView: TframLiveView
     object lbThreads: TListBox
       AlignWithMargins = True
       Left = 5
-      Top = 44
-      Width = 101
-      Height = 357
-      Align = alClient
+      Top = 312
+      Width = 141
+      Height = 89
+      Align = alBottom
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -11
@@ -96,12 +97,35 @@ object framLiveView: TframLiveView
       TabOrder = 1
       OnClick = lbThreadsClick
     end
+    object lvThreads: TListView
+      Left = 2
+      Top = 41
+      Width = 147
+      Height = 268
+      Align = alClient
+      Columns = <
+        item
+          Caption = 'Id'
+        end
+        item
+          Caption = 'Creation'
+        end>
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      RowSelect = True
+      ParentFont = False
+      TabOrder = 2
+      ViewStyle = vsReport
+    end
   end
   object GroupBox2: TGroupBox
     AlignWithMargins = True
-    Left = 120
+    Left = 160
     Top = 99
-    Width = 470
+    Width = 485
     Height = 406
     Margins.Left = 2
     Margins.Top = 2
@@ -120,7 +144,7 @@ object framLiveView: TframLiveView
       AlignWithMargins = True
       Left = 5
       Top = 44
-      Width = 460
+      Width = 475
       Height = 342
       Align = alClient
       Font.Charset = DEFAULT_CHARSET
@@ -136,7 +160,7 @@ object framLiveView: TframLiveView
     object pnlStack: TPanel
       Left = 2
       Top = 15
-      Width = 466
+      Width = 481
       Height = 26
       Align = alTop
       BevelOuter = bvNone
@@ -148,16 +172,16 @@ object framLiveView: TframLiveView
       ParentFont = False
       TabOrder = 1
       object chkAutoRefresh: TCheckBox
-        Left = 88
+        Left = 136
         Top = 5
-        Width = 105
+        Width = 137
         Height = 17
         Caption = 'Auto refresh (1s)'
         TabOrder = 1
         OnClick = chkAutoRefreshClick
       end
       object chkRaw: TCheckBox
-        Left = 199
+        Left = 279
         Top = 5
         Width = 109
         Height = 17
@@ -202,7 +226,7 @@ object framLiveView: TframLiveView
         TabOrder = 0
       end
       object Button1: TBitBtn
-        Left = 314
+        Left = 399
         Top = 1
         Width = 119
         Height = 25
@@ -210,11 +234,20 @@ object framLiveView: TframLiveView
         Caption = 'Try "StackWalk64" API'
         TabOrder = 3
       end
+      object edtInterval: TEdit
+        Left = 89
+        Top = 3
+        Width = 41
+        Height = 21
+        TabOrder = 4
+        Text = '1000'
+        OnChange = edtIntervalChange
+      end
     end
     object Panel1: TPanel
       Left = 2
       Top = 389
-      Width = 466
+      Width = 481
       Height = 15
       Align = alBottom
       BevelOuter = bvNone
@@ -244,7 +277,7 @@ object framLiveView: TframLiveView
   object GroupBox3: TGroupBox
     Left = 0
     Top = 0
-    Width = 592
+    Width = 647
     Height = 97
     Align = alTop
     Caption = ' Process '

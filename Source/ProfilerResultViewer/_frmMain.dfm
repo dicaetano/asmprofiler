@@ -1,9 +1,9 @@
 object frmMain: TfrmMain
   Left = 391
   Top = 330
-  Width = 680
-  Height = 427
   Caption = 'Profile Result Viewer'
+  ClientHeight = 388
+  ClientWidth = 686
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -14,32 +14,21 @@ object frmMain: TfrmMain
   Position = poScreenCenter
   OnCreate = FormCreate
   DesignSize = (
-    672
-    400)
+    686
+    388)
   PixelsPerInch = 96
   TextHeight = 13
   object Label1: TLabel
     Left = 8
-    Top = 12
+    Top = 11
     Width = 69
     Height = 13
     Caption = 'Application dir:'
   end
-  object edtDir: TJvDirectoryEdit
-    Left = 88
-    Top = 8
-    Width = 579
-    Height = 21
-    DialogKind = dkWin32
-    Anchors = [akLeft, akTop, akRight]
-    TabOrder = 0
-    Text = 'edtDir'
-    OnChange = edtDirChange
-  end
   object vtTree: TVirtualStringTree
     Left = 8
     Top = 40
-    Width = 659
+    Width = 681
     Height = 315
     Anchors = [akLeft, akTop, akRight, akBottom]
     Header.AutoSizeIndex = 0
@@ -50,7 +39,8 @@ object frmMain: TfrmMain
     Header.Font.Style = []
     Header.MainColumn = -1
     Header.Options = [hoColumnResize, hoDrag]
-    TabOrder = 1
+    TabOrder = 0
+    ExplicitWidth = 659
     Columns = <>
   end
   object btnOpenViewer: TBitBtn
@@ -60,20 +50,21 @@ object frmMain: TfrmMain
     Height = 25
     Anchors = [akLeft, akBottom]
     Caption = 'Open viewer'
-    TabOrder = 2
+    TabOrder = 1
     OnClick = btnOpenViewerClick
   end
   object lbItems: TListBox
     Left = 8
     Top = 40
-    Width = 659
+    Width = 681
     Height = 316
     Anchors = [akLeft, akTop, akRight, akBottom]
     Columns = 1
     ItemHeight = 13
     Sorted = True
-    TabOrder = 3
+    TabOrder = 2
     OnDblClick = lbItemsDblClick
+    ExplicitWidth = 659
   end
   object Button1: TButton
     Left = 589
@@ -81,8 +72,17 @@ object frmMain: TfrmMain
     Width = 75
     Height = 25
     Caption = 'Button1'
-    TabOrder = 4
+    TabOrder = 3
     Visible = False
     OnClick = Button1Click
+  end
+  object edtdir: TEdit
+    Left = 90
+    Top = 8
+    Width = 503
+    Height = 21
+    TabOrder = 4
+    Text = 'edtdir'
+    OnChange = edtDirChange
   end
 end

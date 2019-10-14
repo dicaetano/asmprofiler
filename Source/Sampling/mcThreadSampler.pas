@@ -225,6 +225,7 @@ end;
 function TThreadSampler.GetCreationtime: TDateTime;
 begin
   Result := (Int64(FCreationtime) div 1000) / MSecsPerSec / SecsPerDay;
+//  Result := FileTimeToSystemTime(FCreationtime);
 end;
 
 function TThreadSampler.GetSnapshotCount: integer;
@@ -682,6 +683,7 @@ end;
 procedure TThreadSampler.UpdateCPUTime;
 var
   creationtime, exittime, kerneltime, usertime: JwaWinBase._FILETIME;
+  sys: _SYSTEMTIME;
 begin
   //Handle := OpenThread(THREAD_SET_INFORMATION or THREAD_QUERY_INFORMATION, False, windows.GetCurrentThreadId);
 

@@ -8,7 +8,7 @@ object frmResults: TfrmResults
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
-  Font.Name = 'MS Sans Serif'
+  Font.Name = 'Segoe UI'
   Font.Style = []
   OldCreateOrder = False
   Position = poScreenCenter
@@ -72,7 +72,7 @@ object frmResults: TfrmResults
         object Label1: TLabel
           Left = 8
           Top = 19
-          Width = 37
+          Width = 38
           Height = 13
           Caption = 'Thread:'
         end
@@ -140,7 +140,7 @@ object frmResults: TfrmResults
         Margins.Top = 4
         Margins.Right = 0
         Margins.Bottom = 0
-        ActivePage = tsTraceTree
+        ActivePage = tsUnitOverview
         Align = alClient
         Images = ImageList1
         Style = tsFlatButtons
@@ -162,8 +162,9 @@ object frmResults: TfrmResults
             Header.Font.Charset = DEFAULT_CHARSET
             Header.Font.Color = clWindowText
             Header.Font.Height = -11
-            Header.Font.Name = 'MS Sans Serif'
+            Header.Font.Name = 'Segoe UI'
             Header.Font.Style = []
+            Header.Height = 17
             Header.Options = [hoColumnResize, hoDrag, hoVisible]
             Header.SortDirection = sdDescending
             IncrementalSearch = isAll
@@ -284,10 +285,11 @@ object frmResults: TfrmResults
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
             Font.Height = -11
-            Font.Name = 'MS Sans Serif'
+            Font.Name = 'Segoe UI'
             Font.Style = [fsBold]
             ParentFont = False
-            Transparent = False
+            Transparent = True
+            ExplicitWidth = 51
           end
           inline framProfileResultTree1: TframProfileResultTree
             Left = 0
@@ -296,12 +298,17 @@ object frmResults: TfrmResults
             Height = 248
             Align = alClient
             TabOrder = 0
+            ExplicitTop = 13
+            ExplicitWidth = 973
+            ExplicitHeight = 248
             inherited vtreeUnit: TVirtualStringTree
               Width = 973
               Height = 248
-              Font.Name = 'MS Sans Serif'
+              Font.Name = 'Segoe UI'
               OnChange = framProfileResultTree1vtreeUnitChange
               OnDblClick = framProfileResultTree1vtreeUnitDblClick
+              ExplicitWidth = 973
+              ExplicitHeight = 248
               Columns = <
                 item
                   Color = 15921906
@@ -415,7 +422,7 @@ object frmResults: TfrmResults
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clWindowText
               Font.Height = -11
-              Font.Name = 'MS Sans Serif'
+              Font.Name = 'Segoe UI'
               Font.Style = [fsBold]
               ParentBackground = False
               ParentFont = False
@@ -429,15 +436,21 @@ object frmResults: TfrmResults
                 Font.Charset = DEFAULT_CHARSET
                 Font.Color = clWindowText
                 Font.Height = -11
-                Font.Name = 'MS Sans Serif'
+                Font.Name = 'Segoe UI'
                 Font.Style = []
                 ParentFont = False
                 TabOrder = 0
+                ExplicitLeft = 2
+                ExplicitTop = 15
+                ExplicitWidth = 969
+                ExplicitHeight = 88
                 inherited vtreeUnit: TVirtualStringTree
                   Width = 969
                   Height = 88
-                  Font.Name = 'MS Sans Serif'
+                  Font.Name = 'Segoe UI'
                   OnDblClick = framProfileResultParentsvtreeUnitDblClick
+                  ExplicitWidth = 969
+                  ExplicitHeight = 88
                   Columns = <
                     item
                       Color = 15921906
@@ -544,7 +557,7 @@ object frmResults: TfrmResults
                 Font.Charset = DEFAULT_CHARSET
                 Font.Color = clWindowText
                 Font.Height = -11
-                Font.Name = 'MS Sans Serif'
+                Font.Name = 'Segoe UI'
                 Font.Style = [fsBold]
                 ParentBackground = False
                 ParentFont = False
@@ -558,14 +571,20 @@ object frmResults: TfrmResults
                   Font.Charset = DEFAULT_CHARSET
                   Font.Color = clWindowText
                   Font.Height = -11
-                  Font.Name = 'MS Sans Serif'
+                  Font.Name = 'Segoe UI'
                   Font.Style = []
                   ParentFont = False
                   TabOrder = 0
+                  ExplicitLeft = 2
+                  ExplicitTop = 15
+                  ExplicitWidth = 969
+                  ExplicitHeight = 97
                   inherited vtreeUnit: TVirtualStringTree
                     Width = 969
                     Height = 97
-                    Font.Name = 'MS Sans Serif'
+                    Font.Name = 'Segoe UI'
+                    ExplicitWidth = 969
+                    ExplicitHeight = 97
                     Columns = <
                       item
                         Color = 15921906
@@ -664,7 +683,7 @@ object frmResults: TfrmResults
                 Font.Charset = DEFAULT_CHARSET
                 Font.Color = clWindowText
                 Font.Height = -11
-                Font.Name = 'MS Sans Serif'
+                Font.Name = 'Segoe UI'
                 Font.Style = [fsBold]
                 ParentBackground = False
                 ParentFont = False
@@ -672,104 +691,104 @@ object frmResults: TfrmResults
                 object Label2: TLabel
                   Left = 149
                   Top = 30
-                  Width = 47
+                  Width = 53
                   Height = 13
                   Caption = 'Own time:'
                   Font.Charset = DEFAULT_CHARSET
                   Font.Color = clWindowText
                   Font.Height = -11
-                  Font.Name = 'MS Sans Serif'
+                  Font.Name = 'Segoe UI'
                   Font.Style = []
                   ParentFont = False
                 end
                 object Label3: TLabel
                   Left = 148
                   Top = 53
-                  Width = 48
+                  Width = 55
                   Height = 13
                   Caption = 'Child time:'
                   Font.Charset = DEFAULT_CHARSET
                   Font.Color = clWindowText
                   Font.Height = -11
-                  Font.Name = 'MS Sans Serif'
+                  Font.Name = 'Segoe UI'
                   Font.Style = []
                   ParentFont = False
                 end
                 object Label4: TLabel
                   Left = 147
                   Top = 76
-                  Width = 49
+                  Width = 52
                   Height = 13
                   Caption = 'Total time:'
                   Font.Charset = DEFAULT_CHARSET
                   Font.Color = clWindowText
                   Font.Height = -11
-                  Font.Name = 'MS Sans Serif'
+                  Font.Name = 'Segoe UI'
                   Font.Style = []
                   ParentFont = False
                 end
                 object Label5: TLabel
                   Left = 11
                   Top = 23
-                  Width = 25
+                  Width = 27
                   Height = 13
                   Caption = 'Calls:'
                   Font.Charset = DEFAULT_CHARSET
                   Font.Color = clWindowText
                   Font.Height = -11
-                  Font.Name = 'MS Sans Serif'
+                  Font.Name = 'Segoe UI'
                   Font.Style = []
                   ParentFont = False
                 end
                 object Label6: TLabel
                   Left = 11
                   Top = 50
-                  Width = 58
+                  Width = 61
                   Height = 13
                   Caption = 'Parent calls:'
                   Font.Charset = DEFAULT_CHARSET
                   Font.Color = clWindowText
                   Font.Height = -11
-                  Font.Name = 'MS Sans Serif'
+                  Font.Name = 'Segoe UI'
                   Font.Style = []
                   ParentFont = False
                 end
                 object Label7: TLabel
                   Left = 11
                   Top = 77
-                  Width = 50
+                  Width = 55
                   Height = 13
                   Caption = 'Child calls:'
                   Font.Charset = DEFAULT_CHARSET
                   Font.Color = clWindowText
                   Font.Height = -11
-                  Font.Name = 'MS Sans Serif'
+                  Font.Name = 'Segoe UI'
                   Font.Style = []
                   ParentFont = False
                 end
                 object Label8: TLabel
                   Left = 202
                   Top = 12
-                  Width = 20
+                  Width = 23
                   Height = 13
                   Caption = 'Min:'
                   Font.Charset = DEFAULT_CHARSET
                   Font.Color = clWindowText
                   Font.Height = -11
-                  Font.Name = 'MS Sans Serif'
+                  Font.Name = 'Segoe UI'
                   Font.Style = []
                   ParentFont = False
                 end
                 object Label9: TLabel
                   Left = 269
                   Top = 12
-                  Width = 23
+                  Width = 24
                   Height = 13
                   Caption = 'Max:'
                   Font.Charset = DEFAULT_CHARSET
                   Font.Color = clWindowText
                   Font.Height = -11
-                  Font.Name = 'MS Sans Serif'
+                  Font.Name = 'Segoe UI'
                   Font.Style = []
                   ParentFont = False
                 end
@@ -782,7 +801,7 @@ object frmResults: TfrmResults
                   Font.Charset = DEFAULT_CHARSET
                   Font.Color = clWindowText
                   Font.Height = -11
-                  Font.Name = 'MS Sans Serif'
+                  Font.Name = 'Segoe UI'
                   Font.Style = []
                   ParentFont = False
                 end
@@ -795,7 +814,7 @@ object frmResults: TfrmResults
                   Font.Charset = DEFAULT_CHARSET
                   Font.Color = clWindowText
                   Font.Height = -11
-                  Font.Name = 'MS Sans Serif'
+                  Font.Name = 'Segoe UI'
                   Font.Style = [fsUnderline]
                   ParentFont = False
                 end
@@ -808,7 +827,7 @@ object frmResults: TfrmResults
                   Font.Charset = DEFAULT_CHARSET
                   Font.Color = clWindowText
                   Font.Height = -11
-                  Font.Name = 'MS Sans Serif'
+                  Font.Name = 'Segoe UI'
                   Font.Style = []
                   ParentFont = False
                   TabOrder = 0
@@ -823,7 +842,7 @@ object frmResults: TfrmResults
                   Font.Charset = DEFAULT_CHARSET
                   Font.Color = clWindowText
                   Font.Height = -11
-                  Font.Name = 'MS Sans Serif'
+                  Font.Name = 'Segoe UI'
                   Font.Style = []
                   ParentFont = False
                   TabOrder = 1
@@ -838,7 +857,7 @@ object frmResults: TfrmResults
                   Font.Charset = DEFAULT_CHARSET
                   Font.Color = clWindowText
                   Font.Height = -11
-                  Font.Name = 'MS Sans Serif'
+                  Font.Name = 'Segoe UI'
                   Font.Style = []
                   ParentFont = False
                   TabOrder = 2
@@ -853,7 +872,7 @@ object frmResults: TfrmResults
                   Font.Charset = DEFAULT_CHARSET
                   Font.Color = clWindowText
                   Font.Height = -11
-                  Font.Name = 'MS Sans Serif'
+                  Font.Name = 'Segoe UI'
                   Font.Style = []
                   ParentFont = False
                   TabOrder = 3
@@ -868,7 +887,7 @@ object frmResults: TfrmResults
                   Font.Charset = DEFAULT_CHARSET
                   Font.Color = clWindowText
                   Font.Height = -11
-                  Font.Name = 'MS Sans Serif'
+                  Font.Name = 'Segoe UI'
                   Font.Style = []
                   ParentFont = False
                   TabOrder = 4
@@ -883,7 +902,7 @@ object frmResults: TfrmResults
                   Font.Charset = DEFAULT_CHARSET
                   Font.Color = clWindowText
                   Font.Height = -11
-                  Font.Name = 'MS Sans Serif'
+                  Font.Name = 'Segoe UI'
                   Font.Style = []
                   ParentFont = False
                   TabOrder = 5
@@ -898,7 +917,7 @@ object frmResults: TfrmResults
                   Font.Charset = DEFAULT_CHARSET
                   Font.Color = clWindowText
                   Font.Height = -11
-                  Font.Name = 'MS Sans Serif'
+                  Font.Name = 'Segoe UI'
                   Font.Style = []
                   ParentFont = False
                   TabOrder = 6
@@ -913,7 +932,7 @@ object frmResults: TfrmResults
                   Font.Charset = DEFAULT_CHARSET
                   Font.Color = clWindowText
                   Font.Height = -11
-                  Font.Name = 'MS Sans Serif'
+                  Font.Name = 'Segoe UI'
                   Font.Style = []
                   ParentFont = False
                   TabOrder = 7
@@ -928,7 +947,7 @@ object frmResults: TfrmResults
                   Font.Charset = DEFAULT_CHARSET
                   Font.Color = clWindowText
                   Font.Height = -11
-                  Font.Name = 'MS Sans Serif'
+                  Font.Name = 'Segoe UI'
                   Font.Style = []
                   ParentFont = False
                   TabOrder = 8
@@ -943,7 +962,7 @@ object frmResults: TfrmResults
                   Font.Charset = DEFAULT_CHARSET
                   Font.Color = clWindowText
                   Font.Height = -11
-                  Font.Name = 'MS Sans Serif'
+                  Font.Name = 'Segoe UI'
                   Font.Style = []
                   ParentFont = False
                   TabOrder = 9
@@ -958,7 +977,7 @@ object frmResults: TfrmResults
                   Font.Charset = DEFAULT_CHARSET
                   Font.Color = clWindowText
                   Font.Height = -11
-                  Font.Name = 'MS Sans Serif'
+                  Font.Name = 'Segoe UI'
                   Font.Style = []
                   ParentFont = False
                   TabOrder = 10
@@ -973,7 +992,7 @@ object frmResults: TfrmResults
                   Font.Charset = DEFAULT_CHARSET
                   Font.Color = clWindowText
                   Font.Height = -11
-                  Font.Name = 'MS Sans Serif'
+                  Font.Name = 'Segoe UI'
                   Font.Style = []
                   ParentFont = False
                   TabOrder = 11
@@ -988,7 +1007,7 @@ object frmResults: TfrmResults
                   Font.Charset = DEFAULT_CHARSET
                   Font.Color = clWindowText
                   Font.Height = -11
-                  Font.Name = 'MS Sans Serif'
+                  Font.Name = 'Segoe UI'
                   Font.Style = []
                   ParentFont = False
                   TabOrder = 12
@@ -1003,7 +1022,7 @@ object frmResults: TfrmResults
                   Font.Charset = DEFAULT_CHARSET
                   Font.Color = clWindowText
                   Font.Height = -11
-                  Font.Name = 'MS Sans Serif'
+                  Font.Name = 'Segoe UI'
                   Font.Style = []
                   ParentFont = False
                   TabOrder = 13
@@ -1019,7 +1038,7 @@ object frmResults: TfrmResults
                   Font.Charset = DEFAULT_CHARSET
                   Font.Color = clWindowText
                   Font.Height = -11
-                  Font.Name = 'MS Sans Serif'
+                  Font.Name = 'Segoe UI'
                   Font.Style = []
                   ParentFont = False
                   TabOrder = 14
@@ -1050,20 +1069,18 @@ object frmResults: TfrmResults
                   ParentColor = True
                   TabOrder = 15
                   Anchors = [akLeft, akTop, akRight, akBottom]
+                  DefaultCanvas = 'TGDIPlusCanvas'
                   PrintMargins = (
                     15
                     41
                     15
                     41)
+                  ColorPaletteIndex = 13
                   object OwnTimeSeries: TBarSeries
-                    Marks.Arrow.Visible = True
-                    Marks.Callout.Brush.Color = clBlack
-                    Marks.Callout.Arrow.Visible = True
                     Marks.Visible = False
                     SeriesColor = 4259584
                     Title = 'Own time'
                     BarWidthPercent = 95
-                    Gradient.Direction = gdTopBottom
                     MultiBar = mbStacked
                     XValues.Name = 'X'
                     XValues.Order = loAscending
@@ -1071,14 +1088,10 @@ object frmResults: TfrmResults
                     YValues.Order = loNone
                   end
                   object ChildTimeSeries: TBarSeries
-                    Marks.Arrow.Visible = True
-                    Marks.Callout.Brush.Color = clBlack
-                    Marks.Callout.Arrow.Visible = True
                     Marks.Visible = False
                     SeriesColor = 4227327
                     Title = 'Child time'
                     BarWidthPercent = 95
-                    Gradient.Direction = gdTopBottom
                     MultiBar = mbStacked
                     XValues.Name = 'X'
                     XValues.Order = loAscending
@@ -1100,9 +1113,13 @@ object frmResults: TfrmResults
             Height = 586
             Align = alClient
             TabOrder = 0
+            ExplicitWidth = 973
+            ExplicitHeight = 586
             inherited vtreeTrace: TVirtualStringTree
               Width = 973
               Height = 586
+              ExplicitWidth = 973
+              ExplicitHeight = 586
             end
           end
         end

@@ -3,8 +3,9 @@ unit LiveViewFrame;
 interface
 
 uses
-  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, 
-  Dialogs, StdCtrls, ExtCtrls, Buttons, mcProcessSampler, ActnList;
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, ExtCtrls, Buttons, mcProcessSampler, ActnList,
+  System.Actions, Vcl.ComCtrls;
 
 type
   TProfileNotify  = procedure(aProcessId: Integer) of object;
@@ -36,6 +37,8 @@ type
     actTryStackwalk64API: TAction;
     btnProfileIt: TBitBtn;
     tmrRefresh: TTimer;
+    edtInterval: TEdit;
+    lvThreads: TListView;
     procedure actRefreshThreadsExecute(Sender: TObject);
     procedure actRefreshStackExecute(Sender: TObject);
     procedure ActionList1Update(Action: TBasicAction; var Handled: Boolean);
@@ -45,6 +48,7 @@ type
     procedure chkAutoRefreshClick(Sender: TObject);
     procedure tmrRefreshTimer(Sender: TObject);
     procedure chkRawClick(Sender: TObject);
+    procedure edtIntervalChange(Sender: TObject);
   private
     FProcessObject: TProcessSampler;
     FOnProfileItClick: TProfileNotify;
@@ -59,7 +63,7 @@ type
 implementation
 
 uses
-  mcThreadSampler, mcThreadUtils;
+  mcThreadSampler, mcThreadUtils, DateUtils;
 
 {$R *.dfm}
 
@@ -94,23 +98,30 @@ procedure TframLiveView.actRefreshThreadsExecute(Sender: TObject);
 var
   i: Integer;
   ts: TThreadSampler;
+  item: TListItem;
 begin
   if ProcessObject = nil then Exit;
 
   lbThreads.Items.BeginUpdate;
+  lvThreads.Items.BeginUpdate;
   try
 
     ProcessObject.RefreshThreads;
 
     lbThreads.Clear;
+    lvThreads.Clear;
     for i := 0 to ProcessObject.ThreadCount - 1 do
     begin
       ts := ProcessObject.Threads[i];
       lbThreads.Items.AddObject( IntToStr(ts.ThreadId), ts);
+      item := lvThreads.Items.Add;
+      item.Caption := ts.ThreadId.ToString;
+      item.SubItems.Add(DateTimeToStr(ts.Creationtime));
     end;
 
   finally
     lbThreads.Items.EndUpdate;
+    lvThreads.Items.EndUpdate;
   end;
 end;
 
@@ -155,6 +166,7 @@ end;
 
 procedure TframLiveView.chkAutoRefreshClick(Sender: TObject);
 begin
+  tmrRefresh.Interval := StrToInt(edtInterval.Text);
   tmrRefresh.Enabled := chkAutoRefresh.Checked;
 end;
 
@@ -167,6 +179,11 @@ destructor TframLiveView.Destroy;
 begin
   ProcessObject.Free;
   inherited;
+end;
+
+procedure TframLiveView.edtIntervalChange(Sender: TObject);
+begin
+  chkAutoRefresh.Caption := 'Auto Refresh (' + FloatToStr(StrToIntDef(edtInterval.Text, 0) / 1000) + 's)';
 end;
 
 procedure TframLiveView.lbThreadsClick(Sender: TObject);

@@ -1,14 +1,14 @@
 object framProcesses: TframProcesses
   Left = 0
   Top = 0
-  Width = 547
+  Width = 594
   Height = 436
   TabOrder = 0
   object GroupBox1: TGroupBox
     AlignWithMargins = True
     Left = 2
     Top = 2
-    Width = 543
+    Width = 590
     Height = 432
     Margins.Left = 2
     Margins.Top = 2
@@ -23,10 +23,11 @@ object framProcesses: TframProcesses
     Font.Style = [fsBold]
     ParentFont = False
     TabOrder = 0
+    ExplicitWidth = 543
     object pnlProcess: TPanel
       Left = 2
       Top = 15
-      Width = 539
+      Width = 586
       Height = 26
       Align = alTop
       BevelOuter = bvNone
@@ -37,8 +38,9 @@ object framProcesses: TframProcesses
       Font.Style = []
       ParentFont = False
       TabOrder = 0
+      ExplicitWidth = 539
       object btnRefreshProcesses: TBitBtn
-        Left = 3
+        Left = 171
         Top = 1
         Width = 85
         Height = 25
@@ -74,7 +76,7 @@ object framProcesses: TframProcesses
         TabOrder = 0
       end
       object btnLiveView: TBitBtn
-        Left = 94
+        Left = 262
         Top = 1
         Width = 85
         Height = 25
@@ -110,7 +112,7 @@ object framProcesses: TframProcesses
         TabOrder = 1
       end
       object btnProfileIt: TBitBtn
-        Left = 185
+        Left = 354
         Top = 1
         Width = 85
         Height = 25
@@ -162,12 +164,12 @@ object framProcesses: TframProcesses
         TabOrder = 2
       end
       object btnInject: TBitBtn
-        Left = 296
+        Left = 448
         Top = 1
-        Width = 209
+        Width = 135
         Height = 25
         Action = actInjectDll
-        Caption = 'Inject AsmProfiler.dll (instrumenting)'
+        Caption = 'Inject AsmProfiler.dll'
         Glyph.Data = {
           36050000424D3605000000000000360400002800000010000000100000000100
           0800000000000001000000000000000000000001000000010000FF00FF000062
@@ -218,7 +220,7 @@ object framProcesses: TframProcesses
       AlignWithMargins = True
       Left = 5
       Top = 44
-      Width = 533
+      Width = 580
       Height = 383
       Align = alClient
       Font.Charset = DEFAULT_CHARSET
@@ -230,6 +232,24 @@ object framProcesses: TframProcesses
       ParentFont = False
       TabOrder = 1
       OnDblClick = lbProcessesDblClick
+      OnKeyPress = lbProcessesKeyPress
+      ExplicitWidth = 533
+    end
+    object sbFilter: TSearchBox
+      Left = 5
+      Top = 18
+      Width = 162
+      Height = 21
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 2
+      TextHint = 'F2 - Filter'
+      OnChange = sbFilterChange
+      OnKeyDown = sbFilterKeyDown
     end
   end
   object ActionList1: TActionList

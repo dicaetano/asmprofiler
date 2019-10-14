@@ -137,7 +137,7 @@ type
     function GetIsSet: boolean; virtual;
   public
     class function IsFlagSet(const flagName: string): boolean;
-    constructor Create(const flagName: string);
+    constructor Create(flagName: string);
     destructor  Destroy; override;
     procedure ClearFlag;
     function  SetFlag: boolean;
@@ -625,7 +625,7 @@ end; { TGpFlag.ClearFlag }
 {:Create and set the flag.
   @since   2002-12-13
 }
-constructor TGpFlag.Create(const flagName: string);
+constructor TGpFlag.Create(flagName: string);
 begin
   gfFlagName := flagName;
   gfCreateFailed := not SetFlag;

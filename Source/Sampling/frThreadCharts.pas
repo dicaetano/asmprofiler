@@ -4,7 +4,8 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, 
-  Dialogs, mcSamplingResult, Series, TeEngine, TeeProcs, Chart, ExtCtrls, StdCtrls;
+  Dialogs, mcSamplingResult, Series, TeEngine, TeeProcs, Chart, ExtCtrls, StdCtrls,
+  VclTee.TeeGDIPlus;
 
 type
   TframThreadCharts = class(TFrame)

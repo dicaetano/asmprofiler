@@ -4,17 +4,16 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, Mask, VirtualTrees, Buttons, JvToolEdit;
-  //JvExMask;
+  Dialogs, StdCtrls, Mask, VirtualTrees, Buttons;
 
 type
   TfrmMain = class(TForm)
-    edtDir: TJvDirectoryEdit;
     Label1: TLabel;
     vtTree: TVirtualStringTree;
     btnOpenViewer: TBitBtn;
     lbItems: TListBox;
     Button1: TButton;
+    edtdir: TEdit;
     procedure edtDirChange(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure btnOpenViewerClick(Sender: TObject);
@@ -133,7 +132,7 @@ end;
 
 procedure TfrmMain.FormCreate(Sender: TObject);
 begin
-  edtDir.InitialDir := ExtractFilePath(Application.ExeName);
+//  edtDir.InitialDir := ExtractFilePath(Application.ExeName);
   edtDir.Text       := ExtractFilePath(Application.ExeName);
 
   //shellexecute(0, pchar('open'),'mcfield.pas',nil,nil, SW_SHOWNORMAL);

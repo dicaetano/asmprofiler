@@ -22,8 +22,9 @@ object framProfileResultTree: TframProfileResultTree
     Header.Font.Charset = DEFAULT_CHARSET
     Header.Font.Color = clWindowText
     Header.Font.Height = -11
-    Header.Font.Name = 'MS Sans Serif'
+    Header.Font.Name = 'Segoe UI'
     Header.Font.Style = []
+    Header.Height = 17
     Header.Options = [hoColumnResize, hoDrag, hoVisible]
     Header.SortDirection = sdDescending
     IncrementalSearch = isAll

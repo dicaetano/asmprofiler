@@ -50,6 +50,8 @@ object frmChoiceMainForm: TfrmChoiceMainForm
           Font.Style = [fsBold]
           ParentFont = False
           Layout = tlCenter
+          ExplicitWidth = 111
+          ExplicitHeight = 19
         end
       end
       object Panel2: TPanel
@@ -71,9 +73,6 @@ object frmChoiceMainForm: TfrmChoiceMainForm
           Font.Height = -16
           Font.Name = 'Tahoma'
           Font.Style = []
-          ParentFont = False
-          TabOrder = 0
-          OnClick = btnViewProcessesClick
           Glyph.Data = {
             F6060000424DF606000000000000360000002800000018000000180000000100
             180000000000C0060000120B0000120B00000000000000000000FF00FFFF00FF
@@ -131,6 +130,9 @@ object frmChoiceMainForm: TfrmChoiceMainForm
             EED8B7AE837EAE837EFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00
             FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFAE837EAE
             837EAE837EAE837EAE837EFF00FFFF00FFFF00FFFF00FFFF00FF}
+          ParentFont = False
+          TabOrder = 0
+          OnClick = btnViewProcessesClick
         end
       end
       object Panel3: TPanel
@@ -152,9 +154,6 @@ object frmChoiceMainForm: TfrmChoiceMainForm
           Font.Height = -16
           Font.Name = 'Tahoma'
           Font.Style = []
-          ParentFont = False
-          TabOrder = 0
-          OnClick = btnViewResultsClick
           Glyph.Data = {
             76060000424D7606000000000000360400002800000018000000180000000100
             08000000000040020000000000000000000000010000000100001A5AF500195B
@@ -208,6 +207,9 @@ object frmChoiceMainForm: TfrmChoiceMainForm
             7C7C7C7C7C7C7C7C7CDF8088DF8079047A755275757575757575757575757575
             7575757575757575755252525252525252525252525252525252525252525252
             5252525252525252525252525252525252525252525252525252}
+          ParentFont = False
+          TabOrder = 0
+          OnClick = btnViewResultsClick
         end
       end
       object Panel4: TPanel
@@ -229,9 +231,6 @@ object frmChoiceMainForm: TfrmChoiceMainForm
           Font.Height = -16
           Font.Name = 'Tahoma'
           Font.Style = []
-          ParentFont = False
-          TabOrder = 0
-          OnClick = btnStartProfilingClick
           Glyph.Data = {
             76060000424D7606000000000000360400002800000018000000180000000100
             0800000000004002000000000000000000000001000000010000000000000101
@@ -285,6 +284,9 @@ object frmChoiceMainForm: TfrmChoiceMainForm
             DDDDDD26889B4A351FDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD262626262626
             2626DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD269CAC9D8B43452EDDDDDDDDDDDD
             DDDDDDDDDDDDDDDDDDDD2626262626262626DDDDDDDDDDDDDDDD}
+          ParentFont = False
+          TabOrder = 0
+          OnClick = btnStartProfilingClick
         end
       end
     end

@@ -8,7 +8,8 @@ uses
   //_frmProfileMain,
   _uProfilerManager, GpLists,
   Buttons, ComCtrls, VirtualTrees, _framProfileResultTree,
-  ExtCtrls, contnrs, _framProfileTraceTree, TeEngine, Series, TeeProcs, Chart, Menus, ImgList;
+  ExtCtrls, contnrs, _framProfileTraceTree, TeEngine, Series, TeeProcs, Chart, Menus, ImgList,
+  VclTee.TeeGDIPlus, System.ImageList, Generics.Collections;
 
   { TODO : 'TODO: Last 1024 value graph'}
   { TODO : 'Total thread cpu usage (kernel, user), incl total cpu time duration'}

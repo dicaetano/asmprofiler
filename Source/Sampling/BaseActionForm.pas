@@ -4,11 +4,12 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs;
+  Dialogs, Vcl.WinXCtrls;
 
 type
   TfrmAction = class(TForm)
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
   private
     { Private declarations }
   public
@@ -42,6 +43,30 @@ begin
 
   //delphi bug?
   Application.BringToFront;
+end;
+
+procedure TfrmAction.FormKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+
+    procedure Search(AControl: TWinControl);
+    var
+      i: Integer;
+    begin
+      if  AControl.ControlCount = 0 then
+      begin
+        if AControl is TSearchBox then
+          AControl.SetFocus;
+      end
+      else
+      for i := 0 to AControl.ControlCount-1 do
+        Search(TWinControl(AControl.Controls[i]));
+    end;
+
+begin
+  if Key = VK_F2 then
+  begin
+    Search(Self);
+  end;
 end;
 
 class procedure TfrmAction.ShowFormWithFrame(aFrame: TFrame; const aFormCaption: string; aOwner: TComponent = nil);

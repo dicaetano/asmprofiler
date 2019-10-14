@@ -1,6 +1,8 @@
  library AsmProfiler;
 
 uses
+//  FastMM4 in 'C:\RTC\Sandbox\PG5-DEV\pg5Dev\src\3rd_party\sp4Dev\src\Componentes\sp4Geral\FastMM4.pas',
+//  FastMM4Messages in 'C:\RTC\Sandbox\PG5-DEV\pg5Dev\src\3rd_party\sp4Dev\src\Componentes\sp4Geral\FastMM4Messages.pas',
   SysUtils,
   Classes,
   Windows,
@@ -24,7 +26,6 @@ uses
   _framProfileTraceTree in '..\SRC\_framProfileTraceTree.pas' {framProfileTraceTree: TFrame},
   _frmCallChart in '..\ProfilerResultViewer\_frmCallChart.pas' {frmCallChart},
   _uAsmProfDllInterface in '_uAsmProfDllInterface.pas';
-
 {$E .dll}
 {$R *.res}
 

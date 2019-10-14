@@ -41,8 +41,8 @@ object framThreadCharts: TframThreadCharts
     Width = 625
     Height = 525
     LeftWall.Color = 16758897
+    Legend.Brush.Gradient.Visible = True
     Legend.CheckBoxes = True
-    Legend.Gradient.Visible = True
     Legend.Title.Text.Strings = (
       'Threads:')
     Title.Shadow.VertSize = 2
@@ -60,21 +60,20 @@ object framThreadCharts: TframThreadCharts
     ParentColor = True
     TabOrder = 1
     OnMouseMove = Chart1MouseMove
+    DefaultCanvas = 'TGDIPlusCanvas'
     PrintMargins = (
       15
       13
       15
       13)
+    ColorPaletteIndex = 13
     object Series1: TLineSeries
       ColorEachLine = False
-      Marks.Arrow.Visible = True
-      Marks.Callout.Brush.Color = clBlack
-      Marks.Callout.Arrow.Visible = True
-      Marks.Clip = True
-      Marks.ShapeStyle = fosRoundRectangle
-      Marks.Style = smsValue
       Marks.Visible = True
+      Marks.Style = smsValue
+      Marks.Clip = True
       OnGetMarkText = Series1GetMarkText
+      Brush.BackColor = clDefault
       Dark3D = False
       LinePen.Style = psDot
       LinePen.SmallDots = True
@@ -82,7 +81,6 @@ object framThreadCharts: TframThreadCharts
       Pointer.Draw3D = False
       Pointer.InflateMargins = True
       Pointer.Style = psRectangle
-      Pointer.Visible = False
       Stairs = True
       XValues.Name = 'X'
       XValues.Order = loAscending
@@ -90,14 +88,11 @@ object framThreadCharts: TframThreadCharts
       YValues.Order = loNone
     end
     object Series2: TFastLineSeries
-      Marks.Arrow.Visible = True
-      Marks.Callout.Brush.Color = clBlack
-      Marks.Callout.Arrow.Visible = True
+      Marks.Transparent = True
+      Marks.Visible = True
       Marks.Callout.ArrowHeadSize = 3
       Marks.Callout.Distance = -3
       Marks.Callout.Length = 4
-      Marks.Transparent = True
-      Marks.Visible = True
       VertAxis = aRightAxis
       LinePen.Color = clGreen
       LinePen.Width = 2

@@ -6,9 +6,9 @@ object framUnitTreeview: TframUnitTreeview
   TabOrder = 0
   object vtreeItems: TVirtualStringTree
     Left = 0
-    Top = 0
+    Top = 21
     Width = 683
-    Height = 407
+    Height = 386
     Align = alClient
     CheckImageKind = ckDarkCheck
     DefaultNodeHeight = 14
@@ -17,8 +17,9 @@ object framUnitTreeview: TframUnitTreeview
     Header.Font.Charset = DEFAULT_CHARSET
     Header.Font.Color = clWindowText
     Header.Font.Height = -11
-    Header.Font.Name = 'MS Sans Serif'
+    Header.Font.Name = 'Segoe UI'
     Header.Font.Style = []
+    Header.Height = 17
     Header.Options = [hoColumnResize, hoDrag, hoVisible]
     IncrementalSearch = isAll
     IncrementalSearchTimeout = 2500
@@ -80,6 +81,15 @@ object framUnitTreeview: TframUnitTreeview
       Caption = '()'
     end
   end
+  object sbFilter: TEdit
+    Left = 0
+    Top = 0
+    Width = 683
+    Height = 21
+    Align = alTop
+    TabOrder = 2
+    TextHint = 'Filter'
+  end
   object PopupMenu1: TPopupMenu
     Left = 200
     Top = 160
@@ -95,5 +105,10 @@ object framUnitTreeview: TframUnitTreeview
       Caption = 'Save to CSV'
       OnClick = SavetoText1Click
     end
+  end
+  object ApplicationEvents1: TApplicationEvents
+    OnMessage = ApplicationEvents1Message
+    Left = 328
+    Top = 206
   end
 end

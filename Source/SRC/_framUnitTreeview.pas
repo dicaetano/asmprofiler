@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, 
   Dialogs, VirtualTrees, StdCtrls, ExtCtrls,
-  _uProfileClasses, Menus;
+  _uProfileClasses, Menus, Vcl.AppEvnts;
 
 type
   TframUnitTreeview = class(TFrame)
@@ -17,14 +17,14 @@ type
     SavetoHTML1: TMenuItem;
     SavetoRTF1: TMenuItem;
     SavetoText1: TMenuItem;
+    ApplicationEvents1: TApplicationEvents;
+    sbFilter: TEdit;
     procedure vtreeItemsChecked(Sender: TBaseVirtualTree;
       Node: PVirtualNode);
     procedure vtreeItemsCompareNodes(Sender: TBaseVirtualTree; Node1,
       Node2: PVirtualNode; Column: TColumnIndex; var Result: Integer);
     procedure vtreeItemsFreeNode(Sender: TBaseVirtualTree;
       Node: PVirtualNode);
-    procedure vtreeItemsGetText(Sender: TBaseVirtualTree; Node: PVirtualNode; Column: TColumnIndex;
-    TextType: TVSTTextType; var CellText: UnicodeString);
 //    procedure vtreeItemsIncrementalSearch(Sender: TBaseVirtualTree;
 //      Node: PVirtualNode; const SearchText: WideString;
 //      var Result: Integer);
@@ -39,11 +39,15 @@ type
       HitInfo: TVTHeaderHitInfo);
     procedure vtreeItemsIncrementalSearch(Sender: TBaseVirtualTree;
       Node: PVirtualNode; const SearchText: string; var Result: Integer);
+    procedure vtreeItemsGetText(Sender: TBaseVirtualTree; Node: PVirtualNode; Column: TColumnIndex;
+      TextType: TVSTTextType; var CellText: string);
+    procedure sbFilterInvokeSearch(Sender: TObject);
+    procedure ApplicationEvents1Message(var Msg: tagMSG; var Handled: Boolean);
   private
     FSelectedItemsCount: integer;
     FDebugInfoStorage: TDebugInfoStorage;
     procedure SetDebugInfoStorage(const Value: TDebugInfoStorage);
-    { Private declarations }
+    procedure FilterTree(const AFilter: string);
   public
     { Public declarations }
     constructor Create(AOwner: TComponent); override;
@@ -71,6 +75,22 @@ type
     Caption: String;
     Data: Pointer;
   end;
+
+procedure TframUnitTreeview.ApplicationEvents1Message(var Msg: tagMSG; var Handled: Boolean);
+begin
+  if ((msg.message = WM_KEYDOWN) and (msg.wParam = ord(#13)) and sbFilter.Focused) then
+  begin
+    FilterTree(sbFilter.Text);
+    vtreeItems.SetFocus;
+    Handled := True;
+  end;
+
+  if (msg.message = WM_KEYDOWN) and (msg.wParam = VK_F2) and sbFilter.CanFocus then
+  begin
+    sbFilter.SetFocus;
+    Handled := True;
+  end;
+end;
 
 constructor TframUnitTreeview.Create(AOwner: TComponent);
 begin
@@ -183,8 +203,8 @@ begin
     Data.Caption := '';
 end;
 
-procedure TframUnitTreeview.vtreeItemsGetText(Sender: TBaseVirtualTree; Node: PVirtualNode; Column: TColumnIndex;
-    TextType: TVSTTextType; var CellText: UnicodeString);
+procedure TframUnitTreeview.vtreeItemsGetText(Sender: TBaseVirtualTree; Node: PVirtualNode;
+  Column: TColumnIndex; TextType: TVSTTextType; var CellText: string);
 var
   Data: PMyRec;
   ps: PJclMapSegmentExt;
@@ -388,6 +408,33 @@ end;
 procedure TframUnitTreeview.SavetoText1Click(Sender: TObject);
 begin
   SaveStringToFile_Ask( String(vtreeItems.ContentToText(tstAll, ',')) );
+end;
+
+procedure TframUnitTreeview.sbFilterInvokeSearch(Sender: TObject);
+begin
+  FilterTree(sbFilter.Text);
+end;
+
+procedure TframUnitTreeview.FilterTree(const AFilter: string);
+var
+  Node:PVirtualNode;
+  Data: PMyRec;
+begin
+  vtreeItems.BeginUpdate;
+  try
+    Node := vtreeItems.GetFirst;
+
+    while Assigned(Node) do
+    begin
+      Data := vtreeItems.GetNodeData(Node);
+      vtreeItems.IsVisible[Node] := Data.Caption.ToUpper.Contains(AFilter.ToUpper) or (AFilter = '');
+      Node := vtreeItems.GetNext(Node);
+    end;
+
+    vtreeItems.UpdateScrollBars(True);
+  finally
+    vtreeItems.EndUpdate;
+  end;
 end;
 
 function TframUnitTreeview.GetSelectedItemsCount: integer;
