@@ -45,11 +45,17 @@ object framLiveView: TframLiveView
       TabOrder = 0
       ExplicitWidth = 147
       object btnRefreshThreads: TBitBtn
-        Left = 4
+        AlignWithMargins = True
+        Left = 1
         Top = 1
         Width = 85
-        Height = 25
+        Height = 24
+        Margins.Left = 1
+        Margins.Top = 1
+        Margins.Right = 1
+        Margins.Bottom = 1
         Action = actRefreshThreads
+        Align = alLeft
         Caption = 'Refresh'
         Glyph.Data = {
           36030000424D3603000000000000360000002800000010000000100000000100
@@ -79,6 +85,25 @@ object framLiveView: TframLiveView
           FFFF00FFFF00FFFF00FFFF00FFFF00FFC2A6A4C2A6A4C2A6A4C2A6A4C2A6A4C2
           A6A4C2A6A4C2A6A4FF00FFFF00FFFF00FFFF00FFFF00FFFF00FF}
         TabOrder = 0
+        ExplicitLeft = 4
+        ExplicitHeight = 25
+      end
+      object chkAutoRefreshThreads: TCheckBox
+        AlignWithMargins = True
+        Left = 88
+        Top = 3
+        Width = 98
+        Height = 20
+        Margins.Left = 1
+        Margins.Right = 1
+        Align = alClient
+        Caption = 'Auto refresh (1s)'
+        TabOrder = 1
+        OnClick = chkAutoRefreshThreadsClick
+        ExplicitLeft = 95
+        ExplicitTop = 5
+        ExplicitWidth = 92
+        ExplicitHeight = 17
       end
     end
     object lvThreads: TListView
@@ -107,7 +132,8 @@ object framLiveView: TframLiveView
       OnChange = lvThreadsChange
       OnColumnClick = lvThreadsColumnClick
       OnCompare = lvThreadsCompare
-      ExplicitWidth = 163
+      ExplicitLeft = 1
+      ExplicitTop = 44
     end
   end
   object GroupBox2: TGroupBox
@@ -422,7 +448,13 @@ object framLiveView: TframLiveView
   object tmrRefresh: TTimer
     Enabled = False
     OnTimer = tmrRefreshTimer
-    Left = 208
+    Left = 224
+    Top = 208
+  end
+  object tmrRefreshThreads: TTimer
+    Enabled = False
+    OnTimer = tmrRefreshThreadsTimer
+    Left = 304
     Top = 208
   end
 end

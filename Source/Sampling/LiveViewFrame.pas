@@ -38,6 +38,8 @@ type
     tmrRefresh: TTimer;
     edtInterval: TEdit;
     lvThreads: TListView;
+    chkAutoRefreshThreads: TCheckBox;
+    tmrRefreshThreads: TTimer;
     procedure actRefreshThreadsExecute(Sender: TObject);
     procedure actRefreshStackExecute(Sender: TObject);
     procedure ActionList1Update(Action: TBasicAction; var Handled: Boolean);
@@ -52,6 +54,8 @@ type
       Data: Integer; var Compare: Integer);
     procedure lvThreadsChange(Sender: TObject; Item: TListItem;
       Change: TItemChange);
+    procedure tmrRefreshThreadsTimer(Sender: TObject);
+    procedure chkAutoRefreshThreadsClick(Sender: TObject);
   private
     FProcessObject: TProcessSampler;
     FOnProfileItClick: TProfileNotify;
@@ -174,6 +178,11 @@ begin
   tmrRefresh.Enabled := chkAutoRefresh.Checked;
 end;
 
+procedure TframLiveView.chkAutoRefreshThreadsClick(Sender: TObject);
+begin
+  tmrRefreshThreads.Enabled := chkAutoRefreshThreads.Checked;
+end;
+
 procedure TframLiveView.chkRawClick(Sender: TObject);
 begin
   actRefreshStack.Execute;
@@ -241,6 +250,29 @@ begin
     actRefreshThreads.Execute;   //load threads
     lvThreads.ItemIndex := 0;
     actRefreshStack.Execute;     //show stack of first thread
+  end;
+end;
+
+procedure TframLiveView.tmrRefreshThreadsTimer(Sender: TObject);
+var
+  id: integer;
+  item: TListItem;
+begin
+  id := -1;
+  tmrRefreshThreads.Enabled := False;
+  try
+    if lvThreads.ItemIndex <> -1 then
+      id := lvThreads.Items[lvThreads.ItemIndex].Caption.ToInteger;
+
+    actRefreshThreads.Execute;
+  finally
+    if id <> -1 then
+    begin
+      item := lvThreads.FindCaption(-1, id.ToString, False, False, False);
+      if item <> nil then
+        lvThreads.ItemIndex := item.Index;
+    end;
+    tmrRefreshThreads.Enabled := True;
   end;
 end;
 
