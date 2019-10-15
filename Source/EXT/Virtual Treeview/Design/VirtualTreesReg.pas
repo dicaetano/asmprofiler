@@ -5,7 +5,7 @@ unit VirtualTreesReg;
 
 interface
 
-{$include Compilers.inc}
+{$include ..\Source\Compilers.inc}
 
 {$ifdef COMPILER_7_UP}
   // For some things to work we need code, which is classified as being unsafe for .NET.

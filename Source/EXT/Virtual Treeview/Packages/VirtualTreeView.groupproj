@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{6BDD76DF-49F5-4B7E-A932-0F5858EF8B81}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="VirtualTreesD.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="VirtualTreesR.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="VirtualTreesD">
+        <MSBuild Projects="VirtualTreesD.dproj"/>
+    </Target>
+    <Target Name="VirtualTreesD:Clean">
+        <MSBuild Projects="VirtualTreesD.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="VirtualTreesD:Make">
+        <MSBuild Projects="VirtualTreesD.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="VirtualTreesR">
+        <MSBuild Projects="VirtualTreesR.dproj"/>
+    </Target>
+    <Target Name="VirtualTreesR:Clean">
+        <MSBuild Projects="VirtualTreesR.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="VirtualTreesR:Make">
+        <MSBuild Projects="VirtualTreesR.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="VirtualTreesD;VirtualTreesR"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="VirtualTreesD:Clean;VirtualTreesR:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="VirtualTreesD:Make;VirtualTreesR:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

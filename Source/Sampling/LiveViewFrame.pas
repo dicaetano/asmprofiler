@@ -40,6 +40,8 @@ type
     lvThreads: TListView;
     chkAutoRefreshThreads: TCheckBox;
     tmrRefreshThreads: TTimer;
+    chkCPU: TCheckBox;
+    chkCreation: TCheckBox;
     procedure actRefreshThreadsExecute(Sender: TObject);
     procedure actRefreshStackExecute(Sender: TObject);
     procedure ActionList1Update(Action: TBasicAction; var Handled: Boolean);
@@ -56,15 +58,19 @@ type
       Change: TItemChange);
     procedure tmrRefreshThreadsTimer(Sender: TObject);
     procedure chkAutoRefreshThreadsClick(Sender: TObject);
+    procedure chkCreationClick(Sender: TObject);
+    procedure chkCPUClick(Sender: TObject);
   private
     FProcessObject: TProcessSampler;
     FOnProfileItClick: TProfileNotify;
 
     FDescending: Boolean;
     FSortedColumn: Integer;
+    FUpdatingThreads: Boolean;
 
     procedure SetProcessObject(const Value: TProcessSampler);
   public
+    constructor Create(AOwner: TComponent); override;
     destructor Destroy;override;
 
     property ProcessObject: TProcessSampler read FProcessObject write SetProcessObject;
@@ -88,6 +94,9 @@ procedure TframLiveView.actRefreshStackExecute(Sender: TObject);
 var
   ts: TThreadSampler;
 begin
+  if FUpdatingThreads then
+    Exit;
+
   Screen.Cursor := crHourGlass;
   Memo1.Lines.BeginUpdate;
   try
@@ -111,20 +120,21 @@ var
   ts: TThreadSampler;
   item: TListItem;
 begin
-  if ProcessObject = nil then Exit;
+  if ProcessObject = nil then
+    Exit;
 
   lvThreads.Items.BeginUpdate;
   try
-
     ProcessObject.RefreshThreads;
-
     lvThreads.Clear;
+
     for i := 0 to ProcessObject.ThreadCount - 1 do
     begin
       ts := ProcessObject.Threads[i];
       item := lvThreads.Items.Add;
       item.Caption := ts.ThreadId.ToString;
       item.SubItems.Add(DateTimeToStr(ts.Creationtime));
+      item.SubItems.Add(FormatDateTime('hh:mm:ss', ts.Kerneltime + ts.Usertime));
       item.Data := ts;
     end;
 
@@ -183,9 +193,38 @@ begin
   tmrRefreshThreads.Enabled := chkAutoRefreshThreads.Checked;
 end;
 
+procedure TframLiveView.chkCPUClick(Sender: TObject);
+var
+  w: Integer;
+begin
+  w := 0;
+  if chkCPU.Checked then
+    w := 100;
+
+  lvThreads.Columns[2].Width := w;
+end;
+
+procedure TframLiveView.chkCreationClick(Sender: TObject);
+var
+  w: Integer;
+begin
+  w := 0;
+  if chkCreation.Checked then
+    w := 130;
+
+  lvThreads.Columns[1].Width := w;
+end;
+
 procedure TframLiveView.chkRawClick(Sender: TObject);
 begin
   actRefreshStack.Execute;
+end;
+
+constructor TframLiveView.Create(AOwner: TComponent);
+begin
+  inherited;
+  FSortedColumn := 2;
+  FDescending := True;
 end;
 
 destructor TframLiveView.Destroy;
@@ -226,9 +265,21 @@ procedure TframLiveView.lvThreadsCompare(Sender: TObject; Item1,
   Item2: TListItem; Data: Integer; var Compare: Integer);
 begin
   if FSortedColumn = 0 then
-    Compare := CompareText(Item1.Caption, Item2.Caption)
+  begin
+    Compare := 0;
+    if Item1.Caption.ToInteger < Item2.Caption.ToInteger then
+      Compare := -1
+    else
+    if Item1.Caption.ToInteger > Item2.Caption.ToInteger then
+      Compare := 1;
+  end
   else
-  if FSortedColumn <> 0 then
+  if FSortedColumn = 1 then
+    Compare := CompareDateTime(StrToDateTime(Item1.SubItems[FSortedColumn-1]), StrToDateTime(Item2.SubItems[FSortedColumn-1]))
+  else
+  if FSortedColumn = 2 then
+    Compare := CompareTime(StrToTime(Item1.SubItems[FSortedColumn-1]), StrToTime(Item2.SubItems[FSortedColumn-1]))
+  else
     Compare := CompareText(Item1.SubItems[FSortedColumn-1], Item2.SubItems[FSortedColumn-1]);
 
   if FDescending then
@@ -260,6 +311,8 @@ var
 begin
   id := -1;
   tmrRefreshThreads.Enabled := False;
+  FUpdatingThreads := True;
+  lvThreads.Items.BeginUpdate;
   try
     if lvThreads.ItemIndex <> -1 then
       id := lvThreads.Items[lvThreads.ItemIndex].Caption.ToInteger;
@@ -272,6 +325,8 @@ begin
       if item <> nil then
         lvThreads.ItemIndex := item.Index;
     end;
+    FUpdatingThreads := False;
+    lvThreads.Items.EndUpdate;
     tmrRefreshThreads.Enabled := True;
   end;
 end;

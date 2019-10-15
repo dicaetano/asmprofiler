@@ -1,21 +1,24 @@
 object framLiveView: TframLiveView
   Left = 0
   Top = 0
-  Width = 703
-  Height = 507
+  Width = 880
+  Height = 629
+  DoubleBuffered = True
+  ParentDoubleBuffered = False
   TabOrder = 0
   object Splitter1: TSplitter
-    Left = 195
+    Left = 299
     Top = 97
-    Height = 410
+    Height = 532
     ExplicitLeft = 115
+    ExplicitHeight = 410
   end
   object GroupBox1: TGroupBox
     AlignWithMargins = True
     Left = 2
     Top = 99
-    Width = 191
-    Height = 406
+    Width = 295
+    Height = 528
     Margins.Left = 2
     Margins.Top = 2
     Margins.Right = 2
@@ -32,8 +35,8 @@ object framLiveView: TframLiveView
     object pnlThreads: TPanel
       Left = 2
       Top = 15
-      Width = 187
-      Height = 26
+      Width = 291
+      Height = 58
       Align = alTop
       BevelOuter = bvNone
       Font.Charset = DEFAULT_CHARSET
@@ -43,7 +46,6 @@ object framLiveView: TframLiveView
       Font.Style = []
       ParentFont = False
       TabOrder = 0
-      ExplicitWidth = 147
       object btnRefreshThreads: TBitBtn
         AlignWithMargins = True
         Left = 1
@@ -55,7 +57,6 @@ object framLiveView: TframLiveView
         Margins.Right = 1
         Margins.Bottom = 1
         Action = actRefreshThreads
-        Align = alLeft
         Caption = 'Refresh'
         Glyph.Data = {
           36030000424D3603000000000000360000002800000010000000100000000100
@@ -85,32 +86,55 @@ object framLiveView: TframLiveView
           FFFF00FFFF00FFFF00FFFF00FFFF00FFC2A6A4C2A6A4C2A6A4C2A6A4C2A6A4C2
           A6A4C2A6A4C2A6A4FF00FFFF00FFFF00FFFF00FFFF00FFFF00FF}
         TabOrder = 0
-        ExplicitLeft = 4
-        ExplicitHeight = 25
       end
       object chkAutoRefreshThreads: TCheckBox
         AlignWithMargins = True
-        Left = 88
+        Left = 96
         Top = 3
         Width = 98
         Height = 20
         Margins.Left = 1
         Margins.Right = 1
-        Align = alClient
         Caption = 'Auto refresh (1s)'
+        Checked = True
+        State = cbChecked
         TabOrder = 1
         OnClick = chkAutoRefreshThreadsClick
-        ExplicitLeft = 95
-        ExplicitTop = 5
-        ExplicitWidth = 92
-        ExplicitHeight = 17
+      end
+      object chkCPU: TCheckBox
+        AlignWithMargins = True
+        Left = 96
+        Top = 27
+        Width = 72
+        Height = 20
+        Margins.Left = 1
+        Margins.Right = 1
+        Caption = 'CPU Usage'
+        Checked = True
+        State = cbChecked
+        TabOrder = 2
+        OnClick = chkCPUClick
+      end
+      object chkCreation: TCheckBox
+        AlignWithMargins = True
+        Left = 4
+        Top = 27
+        Width = 84
+        Height = 20
+        Margins.Left = 1
+        Margins.Right = 1
+        Caption = 'Creation Time'
+        Checked = True
+        State = cbChecked
+        TabOrder = 3
+        OnClick = chkCreationClick
       end
     end
     object lvThreads: TListView
       Left = 2
-      Top = 41
-      Width = 187
-      Height = 363
+      Top = 73
+      Width = 291
+      Height = 453
       Align = alClient
       Columns = <
         item
@@ -119,29 +143,34 @@ object framLiveView: TframLiveView
         item
           Caption = 'Creation'
           Width = 130
+        end
+        item
+          Caption = 'CPU Usage'
+          Width = 100
         end>
+      DoubleBuffered = True
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -11
       Font.Name = 'Tahoma'
       Font.Style = []
       RowSelect = True
+      ParentDoubleBuffered = False
       ParentFont = False
+      SortType = stText
       TabOrder = 1
       ViewStyle = vsReport
       OnChange = lvThreadsChange
       OnColumnClick = lvThreadsColumnClick
       OnCompare = lvThreadsCompare
-      ExplicitLeft = 1
-      ExplicitTop = 44
     end
   end
   object GroupBox2: TGroupBox
     AlignWithMargins = True
-    Left = 200
+    Left = 304
     Top = 99
-    Width = 501
-    Height = 406
+    Width = 574
+    Height = 528
     Margins.Left = 2
     Margins.Top = 2
     Margins.Right = 2
@@ -155,30 +184,29 @@ object framLiveView: TframLiveView
     Font.Style = [fsBold]
     ParentFont = False
     TabOrder = 1
-    ExplicitLeft = 160
-    ExplicitWidth = 485
     object Memo1: TMemo
       AlignWithMargins = True
       Left = 5
       Top = 44
-      Width = 491
-      Height = 342
+      Width = 564
+      Height = 464
       Align = alClient
+      DoubleBuffered = True
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -11
       Font.Name = 'Tahoma'
       Font.Style = []
+      ParentDoubleBuffered = False
       ParentFont = False
       ScrollBars = ssBoth
       TabOrder = 0
       WordWrap = False
-      ExplicitWidth = 475
     end
     object pnlStack: TPanel
       Left = 2
       Top = 15
-      Width = 497
+      Width = 570
       Height = 26
       Align = alTop
       BevelOuter = bvNone
@@ -189,7 +217,6 @@ object framLiveView: TframLiveView
       Font.Style = []
       ParentFont = False
       TabOrder = 1
-      ExplicitWidth = 521
       object chkAutoRefresh: TCheckBox
         Left = 136
         Top = 5
@@ -265,8 +292,8 @@ object framLiveView: TframLiveView
     end
     object Panel1: TPanel
       Left = 2
-      Top = 389
-      Width = 497
+      Top = 511
+      Width = 570
       Height = 15
       Align = alBottom
       BevelOuter = bvNone
@@ -277,7 +304,6 @@ object framLiveView: TframLiveView
       Font.Style = []
       ParentFont = False
       TabOrder = 2
-      ExplicitWidth = 481
       object Label1: TLabel
         Left = 3
         Top = -1
@@ -297,7 +323,7 @@ object framLiveView: TframLiveView
   object GroupBox3: TGroupBox
     Left = 0
     Top = 0
-    Width = 703
+    Width = 880
     Height = 97
     Align = alTop
     Caption = ' Process '
@@ -308,7 +334,6 @@ object framLiveView: TframLiveView
     Font.Style = [fsBold]
     ParentFont = False
     TabOrder = 2
-    ExplicitWidth = 647
     object Label2: TLabel
       Left = 8
       Top = 42
@@ -452,7 +477,6 @@ object framLiveView: TframLiveView
     Top = 208
   end
   object tmrRefreshThreads: TTimer
-    Enabled = False
     OnTimer = tmrRefreshThreadsTimer
     Left = 304
     Top = 208
